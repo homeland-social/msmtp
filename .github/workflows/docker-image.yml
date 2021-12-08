@@ -19,4 +19,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag msmtp:$(date +%s)
     - name: Push Docker image
-      run: docker push ${{secrets.DOCKER_USER}/msmtp
+      run: docker push ${{secrets.DOCKER_USER}}/msmtp
