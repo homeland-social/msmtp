@@ -14,9 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Create tag
+      run: echo ::set-env name=TAG::$(date +%s)
     - name: Docker login
       run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/msmtp:$(date +%s)
+      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/msmtp:${TAG}
     - name: Push Docker image
-      run: docker push ${{secrets.DOCKER_USER}}/msmtp
+      run: docker push ${{secrets.DOCKER_USER}}/msmtp:${TAG}
