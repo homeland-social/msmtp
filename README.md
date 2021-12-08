@@ -1,0 +1,2 @@
+# msmtp
+Mail server
