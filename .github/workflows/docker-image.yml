@@ -15,10 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Create tag
-      run: echo ::set-env name=TAG::$(date +%s)
+      run: echo "tag=$(date +%s)" >> $GITHUB_ENV
     - name: Docker login
       run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/msmtp:${TAG}
+      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/msmtp:${{env.tag}}
     - name: Push Docker image
-      run: docker push ${{secrets.DOCKER_USER}}/msmtp:${TAG}
+      run: docker push ${{secrets.DOCKER_USER}}/msmtp:${{env.tag}}
