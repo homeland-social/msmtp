@@ -1,4 +1,5 @@
-FROM alpine:3
+ARG ARCH=
+FROM ${ARCH}alpine:3
 
 ADD msmtprc.tpl /var/tmp/
 ADD ./entrypoint.sh /entrypoint.sh
