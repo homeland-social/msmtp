@@ -31,8 +31,15 @@ jobs:
 
       - name: build and push
         run: |
-          docker buildx build \
+          docker buildx build -f Dockerfile \
             --push \
-            --tag latest \
+            --tag ${{secrets.DOCKER_USER}}/msmtp:latest \
             --tag ${{secrets.DOCKER_USER}}/msmtp:${{env.tag}} \
             --platform linux/amd64,linux/arm/v7,linux/arm64 .
+
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD_ }}
+          repository: shantysocial/msmtp
