@@ -1,6 +1,6 @@
 #!/bin/sh
 
-until [ ${RC} -q 0 ]; do
+until [ ${RC} -eq 0 ]; do
     CONFIG=$(wget -qO - --header "Authorization: Bearer ${SHANTY_TOKEN}" ${SHANTY_URL})
     RC=$?
 done

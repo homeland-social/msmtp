@@ -33,7 +33,7 @@ jobs:
         run: |
           docker buildx build \
             --push \
-            --tag latest \
+            --tag ${{secrets.DOCKER_USER}}/msmtp:latest \
             --tag ${{secrets.DOCKER_USER}}/msmtp:${{env.tag}} \
             --platform linux/amd64,linux/arm/v7,linux/arm64 .
 
